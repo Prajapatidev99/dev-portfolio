@@ -25,4 +25,4 @@ npm run build
 
 ## Live
 
-[devprajapati.vercel.app](https://devprajapati.vercel.app)
+[dev-prajapati.vercel.app](https://dev-prajapati.vercel.app)
