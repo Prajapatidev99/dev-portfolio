@@ -85,7 +85,8 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenAdmin }) => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-black/95 backdrop-blur-2xl border-b border-white/5 py-8 px-6 flex flex-col items-center gap-6 md:hidden"
+            className="absolute top-full left-0 w-full backdrop-blur-2xl border-b border-white/5 py-8 px-6 flex flex-col items-center gap-6 md:hidden"
+            style={{ background: 'rgba(0,0,0,0.6)' }}
           >
             {navLinks.map((link) => (
               <a
