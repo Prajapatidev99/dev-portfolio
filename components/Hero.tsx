@@ -101,7 +101,8 @@ const Hero: React.FC = () => {
         <img
           src="/hero-photo.png"
           alt="Dev Prajapati"
-          className="w-full h-full object-cover object-top"
+          className="w-full h-full object-cover"
+          style={{ objectPosition: 'center 40%' }}
           draggable={false}
         />
       </motion.div>
