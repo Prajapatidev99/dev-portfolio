@@ -9,6 +9,7 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import AdminModal from './components/AdminModal';
 import Footer from './components/Footer';
+import TerminalMode from './components/TerminalMode';
 import { INITIAL_PROJECTS } from './constants';
 import { Project } from './types';
 
@@ -62,6 +63,7 @@ const App: React.FC = () => {
       </main>
 
       <Footer />
+      <TerminalMode />
 
       <AdminModal
         isOpen={isAdminOpen}

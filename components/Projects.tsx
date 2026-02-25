@@ -163,16 +163,39 @@ const Projects: React.FC<ProjectsProps> = ({ projects }) => {
 
   return (
     <div className="relative">
-      {/* Section header */}
+      {/* Section header — gradient sweep reveal */}
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
         className="mb-12"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
       >
-        <h2 className="text-xs font-black tracking-[0.3em] text-zinc-600 uppercase mb-4">Selected Work</h2>
-        <h3 className="text-4xl md:text-5xl font-bold tracking-tight">Featured Projects</h3>
+        <motion.h2
+          className="text-xs font-black tracking-[0.3em] text-zinc-600 uppercase mb-4"
+          initial={{ opacity: 0, letterSpacing: '0.6em' }}
+          whileInView={{ opacity: 1, letterSpacing: '0.3em' }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Selected Work
+        </motion.h2>
+        <motion.h3
+          className="text-4xl md:text-5xl font-bold tracking-tight"
+          initial={{ backgroundSize: '0% 100%' }}
+          whileInView={{ backgroundSize: '100% 100%' }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            backgroundImage: 'linear-gradient(90deg, #fff 50%, transparent 50%)',
+            backgroundRepeat: 'no-repeat',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'rgba(255,255,255,0.15)',
+            WebkitTextFillColor: 'unset',
+          }}
+        >
+          Featured Projects
+        </motion.h3>
       </motion.div>
 
       {/* Cards grid */}

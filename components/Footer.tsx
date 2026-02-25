@@ -1,6 +1,48 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 
+// ─── Letter-by-letter reveal ──────────────────────────────────────────────────
+const RevealText: React.FC<{ text: string; className?: string; delay?: number }> = ({
+  text,
+  className = '',
+  delay = 0,
+}) => {
+  const letters = text.split('');
+  return (
+    <motion.span
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-50px' }}
+      className={`inline-block ${className}`}
+    >
+      {letters.map((char, i) => (
+        <motion.span
+          key={i}
+          className="inline-block"
+          style={{ whiteSpace: char === ' ' ? 'pre' : 'normal' }}
+          variants={{
+            hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
+            visible: {
+              opacity: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              transition: {
+                duration: 0.4,
+                delay: delay + i * 0.03,
+                ease: [0.22, 1, 0.36, 1],
+              },
+            },
+          }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+};
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
 const Footer: React.FC = () => {
   return (
     <footer className="relative pt-8 pb-0">
@@ -8,8 +50,38 @@ const Footer: React.FC = () => {
         {/* ── Divider ── */}
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-6 sm:mb-8" />
 
+        {/* ── Animated Typography Reveal ── */}
+        <motion.div
+          className="text-center mb-10 sm:mb-14"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex flex-col items-center justify-center gap-2 sm:gap-4 mb-6">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl text-white flex flex-wrap justify-center items-center gap-x-3 gap-y-2 leading-none">
+              <RevealText text="Thanks" className="font-['Syne'] font-extrabold tracking-tighter uppercase" />
+              <RevealText text="for" className="font-['Playfair_Display'] italic font-bold tracking-normal" delay={0.2} />
+              <RevealText text="visiting" className="font-['Syne'] font-extrabold tracking-tighter uppercase" delay={0.4} />
+              <RevealText text="my" className="font-['Playfair_Display'] italic font-bold tracking-normal" delay={0.6} />
+            </h3>
+            <div className="mt-2 sm:mt-4 flex items-center justify-center">
+              <RevealText text="portfolio" className="font-['Caveat'] text-6xl sm:text-8xl md:text-9xl text-emerald-400 rotate-[-4deg] leading-none" delay={0.8} />
+              <RevealText text="✨" className="text-4xl sm:text-5xl md:text-6xl ml-2 sm:ml-6 mt-4 sm:mt-8" delay={1.2} />
+            </div>
+          </div>
+          <p className="text-sm sm:text-base text-zinc-500 font-light">
+            <RevealText text="Let's build something amazing together." delay={1.5} />
+          </p>
+        </motion.div>
+
         {/* ── Content ── */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+        <motion.div
+          className="flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 1.8, duration: 0.6 }}
+        >
           <p className="text-xs sm:text-sm text-zinc-600 font-medium">
             © {new Date().getFullYear()} Dev Prajapati. Built for speed and impact.
           </p>
@@ -23,7 +95,7 @@ const Footer: React.FC = () => {
             <a href="#projects" className="hover:text-white transition-colors">Projects</a>
             <a href="#contact" className="hover:text-white transition-colors">Contact</a>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {/* ── Animated Wave Divider (below content) ── */}
